@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <div class="father">
+        <h3>这里是父组件</h3>
+        <child>
+            <span slot="dome1">菜单2</span>
+            <div slot="domename">
+                <h1>我是domename</h1>
+            </div>
+        </child>
+    </div>
+</div>
+
+<template id="child">
+    <div class="child">
+        <slot name="dome1"></slot>
+        <h3>这里是子组件</h3>
+         <slot name="domename"></slot>
+    </div>
+</template>
+    <script>
+      new Vue({
+          el:"#app",
+          components: {
+            child: {
+                template: '#child'
+            }
+        },
+          mounted:function(){
+            //   alert(3)
+          }
+      })
+    </script>
+</body>
+
+</html>

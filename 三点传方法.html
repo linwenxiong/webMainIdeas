@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const addPage = (name, title, path) => {
+            return [
+                {
+                    name: name,
+                    title: title,
+                    path: path,
+                    component: () => import(`../views/${name}.vue`),
+                }
+            ]
+        }
+        const routers = [{
+            name: 'home',
+        },
+        ...addPage("李大钊","三点方法","/component"),
+        ...addPage("菱电机","苏联空军","/component/oop"),
+        ...addPage("欧珀的","链家看","/component/iio"),
+        ]
+        console.log(routers)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<title></title>
+</head>
+
+<body>
+	<div id="log">
+		<span>2020-05-22 17:00:00</span><span>2020-05-22 17:30:00</span><span>2020-05-22 18:00:00</span>
+		<div>
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<script>
+		var arr = ['2020-05-22 17:00:00','2020-05-22 17:30:00','2020-05-22 18:00:00']
+		var jsons = [{
+			endtime:'2020-05-22 17:03:50',
+			iskq:false
+		},{
+			endtime:'2020-05-22 17:04:00',
+			iskq:false
+		},{
+			endtime:'2020-05-22 18:05:00',
+			iskq:false
+		}]
+
+		function clock(item) {
+
+
+
+			var intervalID = setInterval(function(){
+				var now = new Date(),  //获取当前时间
+			        end = new Date(item.endtime);  //定义结束时间
+			    var theTime = end.getTime() - now.getTime(),  //距离结束时间的毫秒数
+			        day = Math.floor(theTime/(1000*60*60*24)),  //计算天数
+			        hour = Math.floor(theTime/(1000*60*60)%24),  //计算小时数
+			        min = Math.floor(theTime/(1000*60)%60),  //计算分钟数
+			        sec = Math.floor(theTime/1000%60);  //计算秒数
+			        if( day<0||hour<0||min<0||sec<0  ){
+			        	console.log("已结束")
+			        	item.iskq = true
+			        	clearInterval(intervalID)
+			        }
+			       // console.log(item)
+			    console.log(day + "天" + hour + "小时" + min + "分" + sec+"秒")
+			    // return day + "天" + hour + "小时" + min + "分" + sec+"秒";  //返回倒计时的字符串
+			},1000)
+		}
+		jsons.forEach((item)=>{
+			var now = new Date().getTime()
+			var end = new Date(item.endtime).getTime()
+			if((now - end)>0){
+				return
+			}
+			 clock(item)
+		})
+
+	
+
+	</script>
+</body>
+
+</html>
