@@ -23,15 +23,16 @@
 			endtime:'2020-05-22 17:04:00',
 			iskq:false
 		},{
-			endtime:'2020-05-22 18:05:00',
+			endtime:'2020-05-22 19:46:00',
 			iskq:false
 		}]
 
 		function clock(item) {
-
-
-
+			if( ( new Date().getTime() - new Date(item.endtime).getTime() )>0){
+				return
+			}
 			var intervalID = setInterval(function(){
+
 				var now = new Date(),  //获取当前时间
 			        end = new Date(item.endtime);  //定义结束时间
 			    var theTime = end.getTime() - now.getTime(),  //距离结束时间的毫秒数
@@ -49,12 +50,8 @@
 			    // return day + "天" + hour + "小时" + min + "分" + sec+"秒";  //返回倒计时的字符串
 			},1000)
 		}
+
 		jsons.forEach((item)=>{
-			var now = new Date().getTime()
-			var end = new Date(item.endtime).getTime()
-			if((now - end)>0){
-				return
-			}
 			 clock(item)
 		})
 
