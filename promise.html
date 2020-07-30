@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function promiseFn() {
+            return new Promise(resolve => {
+                setTimeout(() => resolve("test"), 2000);
+            })
+        }
+        // promiseFn().then((res)=>{
+        //     console.log(res)
+        // })
+
+
+
+        function promiseFn1() {
+            return new Promise(resolve => {
+                console.log("开始请求1")
+                setTimeout(() => {
+                   console.log("返回数据了1")
+                   resolve("test")
+                }, 2000);
+            })
+        }
+
+        function promiseFn2() {
+            return new Promise(resolve => {
+                console.log("开始请求2")
+                setTimeout(() => {
+                   console.log("返回数据了2")
+                   resolve("test")
+                }, 2000);
+            })
+        }
+
+        function promiseFn3() {
+            return new Promise(resolve => {
+                console.log("开始请求3")
+                setTimeout(() => {
+                   console.log("返回数据了3")
+                   resolve("test")
+                }, 2000);
+            })
+        }
+        async function test2() {
+             await promiseFn1()
+              await promiseFn2()
+            await promiseFn3()
+            console.log(5566);
+        }
+    </script>
+</body>
+
+</html>
