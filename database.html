@@ -1,0 +1,140 @@
+<html>
+  <body>
+    <h1 id="no1">1.加载中</h1>
+    <h1>2.建表</h1>
+    <p><button onclick="createdTable()">点击建表</button></p>
+    <h1>3. 向指定表中插入数据</h1>
+    <p>title:<input type="text" id="i1"></p>
+    <p>con:  <input type="text" id="i2"></p>
+    <p><button onclick="insert()">插入数据</button></p>
+    <h1>4.查找所有数据</h1>
+    <p><button onclick="websqlGetAllData('webSqlTable')">查找</button></p>
+    <h1>5.查找指定数据</h1>
+    <p><input type="text" id="no2"></p>
+    <p><button onclick="websqlGetAData('webSqlTable')">查找</button></p>
+    <h1>6.删除数据</h1>
+    <p><button onclick="websqlDeleteAllDataFromTable('webSqlTable')">删除</button></p>
+    <h1>7.删除指定数据</h1>
+    <p><input type="text" id="no3"></p>
+    <p><button onclick="websqlDeleteADataFromTable('webSqlTable')">删除</button></p>
+    <h1>8.修改某条数据</h1>
+    <p>title:<input type="text" id="no4"></p>
+    <p>con:<input type="text" id="no5"></p>
+    <p><button onclick="websqlUpdateAData('webSqlTable')">修改</button></p>
+
+    <script>
+      // 第一步：创建数据库
+      var dataBase = window.openDatabase('websql', '1.0', 'Datura练习', 4*1024*1024,function() {}) // 创建数据库
+      document.getElementById("no1").innerText = "创建或已打开数据库，完成"
+      // 第二步：建表
+      function createdTable() {
+        var tableName = 'webSqlTable';//创建表的名称
+        //这里定一个变量来存建表相关信息，并声明主键，需要存储的字段及格式（TITLE、CON、HEIGHT、WEIGHT）
+        var creatTableSQL = 'CREATE TABLE IF  NOT EXISTS '+ tableName + ' (rowid INTEGER PRIMARY KEY AUTOINCREMENT, TITLE text,CON text,HEIGHT text,WEIGTH text)';
+        dataBase.transaction(function (ctx,result) {
+            ctx.executeSql(creatTableSQL,[],function(ctx,result){
+                alert("表创建成功 " + tableName);//建表成功
+            },function(tx, error){
+                alert('创建表失败:' + tableName + error.message);//建表失败
+            });
+        })
+      }
+      // 第三部：插入数据
+      function websqlInsterDataToTable(tableName,TITLE,CON,HEIGHT,WEIGTH){
+          var insterTableSQL = 'INSERT INTO ' + tableName + ' (TITLE,CON,HEIGHT,WEIGTH) VALUES (?,?,?,?)';
+          dataBase.transaction(function (ctx) {
+              ctx.executeSql(insterTableSQL,[TITLE,CON,HEIGHT,WEIGTH],function (ctx,result){
+                      console.log("插入" + tableName  + TITLE + "成功");
+                  },
+                  function (tx, error) {
+                      alert('插入失败: ' + error.message);
+                  });
+          });
+      }
+      
+      // 查找所有数据
+      function websqlGetAllData(tableName){
+        var selectALLSQL = 'SELECT * FROM ' + tableName;
+        dataBase.transaction(function (ctx) {
+          ctx.executeSql(selectALLSQL,[],function (ctx,result){
+                  // alert('查询成功: ' + tableName + result.rows.length);
+                  var len = result.rows.length;
+                  for(var i = 0;i < len;i++) {
+                      console.log("TITLE = "  + result.rows.item(i).TITLE);
+                      console.log("CON = "  + result.rows.item(i).CON);
+                      console.log("HEIGHT = "  + result.rows.item(i).HEIGHT);
+                      console.log("WEIGTH = "  + result.rows.item(i).WEIGTH);
+                      console.log("-------- 我是分割线 -------");
+                  }
+              },
+              function (tx, error) {
+                  alert('查询失败: ' + error.message);
+              });
+        });
+      }
+      // 查询指定数据
+      function websqlGetAData(tableName){
+          var tv = document.getElementById("no2").value
+          var selectSQL = 'SELECT * FROM ' + tableName + ' WHERE TITLE = ?'
+          dataBase.transaction(function (ctx) {
+              ctx.executeSql(selectSQL,[tv],function (ctx,result){
+                      // alert('查询成功: ' + tableName + result.rows.length);
+                      var len = result.rows.length;
+                      for(var i = 0;i < len;i++) {
+                          console.log("TITLE = "  + result.rows.item(i).TITLE);
+                          console.log("CON = "  + result.rows.item(i).CON);
+                          console.log("HEIGHT = "  + result.rows.item(i).HEIGHT);
+                          console.log("WEIGTH = "  + result.rows.item(i).WEIGTH);
+                      }
+                  },
+                  function (tx, error) {
+                      alert('查询失败: ' + error.message);
+                  });
+          });
+      }
+
+      // 删除所有数据
+      function websqlDeleteAllDataFromTable(tableName){
+        var deleteTableSQL = 'DELETE FROM ' + tableName;
+        localStorage.removeItem(tableName);
+        dataBase.transaction(function (ctx,result) {
+            ctx.executeSql(deleteTableSQL,[],function(ctx,result){
+                alert("删除表成功 " + tableName);
+            },function(tx, error){
+                alert('删除表失败:' + tableName + error.message);
+            });
+        });
+      }
+      // 删除指定数据
+      function websqlDeleteADataFromTable(tableName){
+        var tv = document.getElementById("no3").value
+        var deleteDataSQL = 'DELETE FROM ' + tableName + ' WHERE TITLE = ?';
+        localStorage.removeItem(tableName);
+        dataBase.transaction(function (ctx,result) {
+            ctx.executeSql(deleteDataSQL,[tv],function(ctx,result){
+                alert("删除成功 " + tableName + tv);
+            },function(tx, error){
+                alert('删除失败:' + tableName  + tv + error.message);
+            });
+        });
+      }
+      //  修改某条数据
+      function websqlUpdateAData(tableName){
+        var title = document.getElementById("no4").value
+        var con = document.getElementById("no5").value
+          var updateDataSQL = 'UPDATE ' + tableName + ' SET CON = ? WHERE TITLE = ?';
+          dataBase.transaction(function (ctx,result) {
+              ctx.executeSql(updateDataSQL,[con,title],function(ctx,result){
+                  alert("更新成功 " + tableName + title);
+              },function(tx, error){
+                  alert('更新失败:' + tableName  + title + error.message);
+              });
+          });
+      }
+
+      function insert(){
+        websqlInsterDataToTable('webSqlTable',document.getElementById("i1").value,document.getElementById("i2").value,"175cm","40kg")
+      }
+    </script>
+  </body>
+</html>
