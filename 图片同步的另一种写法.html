@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+      let imageurl = 'https://hdbbmp-dev.oss-cn-shenzhen.aliyuncs.com/hdb/2020/09/09/bbc27d26076d45bab2ede573c72baa47'
+      let img = new Image()
+      setTimeout(() => {
+        img.src = imageurl
+      }, 2000)
+      img.addEventListener('load', bbq, false)
+      function bbq () {
+        console.log("图片加载完成")
+      }
+    </script>
+</body>
+
+</html>
