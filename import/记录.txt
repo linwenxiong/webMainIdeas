@@ -1,0 +1,19 @@
+// 1.先全局安装 babel-cli
+// 2.安装转码规则 $ npm install --save-dev babel-preset-es2015
+// 3.用命令运行当前文件：bable 文件名
+
+转码输出
+    # 转码结果写入一个文件
+    # --out-file 或 -o 参数指定输出文件
+    $ babel 01es6.js --out-file 01es5.js 
+    #或者
+    $ babel 01es6.js -o 01es5.js 
+    # 如果需要将整个目录转码
+    # --out-dir 或 -d 参数指定输出目录
+    $ mkdir es6 
+    #创建文件 01.js 02.js 03.js
+    $ babel es6 --out-dir es5
+    #或者
+    $balel es6 -d es5
+    # -s 参数生成source map文件
+    babel es6 -d sMap -s

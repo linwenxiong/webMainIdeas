@@ -19,7 +19,8 @@
 // 2.如果没后缀，会自动拼接后缀去找，顺序：.js/.json/.node，
 // 都找不到就会被认为是个文件夹，查找顺序：package.json(main指定的文件)/index.js/index.json/index.node/都找不到就会失败。
 
-var mod = require('./require试验.js')
-console.log(mod)
-mod.add()
-console.log(mod.getCount());
+console.log(require('./require试验.js'))
+var { count, add } = require('./require试验.js')
+console.log(count)
+add()
+console.log(count);
