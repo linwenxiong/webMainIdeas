@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var obj = {
+      name: '逍遥侠',
+      aihao: {
+        name: '徒步'
+      }
+    }
+    // Object.asse
+    var a = Object.assign({}, obj)
+    var b = { ...obj }
+
+
+    function transfrom(temp) {
+      const objs = {}
+      for (let key in temp) {
+        var value = temp[key]
+        if (value instanceof Object) {
+          objs[key] = transfrom(value)
+        } else {
+          objs[key] = value
+        }
+      }
+      return objs
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>
