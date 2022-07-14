@@ -22,6 +22,65 @@
            return e >1
        })
        console.log(b)
+        
+        
+        // 获取数组中最大值和最小值
+    var maxArr = [5, 6, 2, 3, 7];
+    const max = Math.max.apply(null, maxArr);
+    const min = Math.min.apply(null, maxArr);
+
+
+// 筛选出区别的键和值
+var newData = {
+        cancelAdvanceDay: [],
+        cancelAdvanceHour: "00:15",
+    }
+
+    var obj2 = {
+        aheadCancelTimeLimitType: 4,
+        cancelAdvanceDay: [],
+        cancelAdvanceHour: "00:10",
+        cancelTimeLimitType: 5
+    }
+
+    function getModifyItem(newData, oldData) {
+        var oarr = Object.keys(newData);
+        var oarr2 = Object.keys(oldData);
+
+        const resultArr = [];
+
+        oarr.forEach((o1key) => {
+
+            var o1value = newData[o1key];
+
+            const iss = oarr2.some((o2key) => {
+                return o2key === o1key
+            })
+
+            if (iss) { // 键名相同比较值是否相同
+                const o2value = oldData[o1key]
+
+                if (JSON.stringify(o1value) !== JSON.stringify(o2value)) { // 取不同的值
+
+                    resultArr.push({
+                        key: o1key,
+                        value: o1value
+                    })
+                }
+
+            } else {
+                resultArr.push({
+                    key: o1key,
+                    value: o1value
+                })
+            }
+
+
+        })
+        return resultArr
+    }
+
+
     </script>
 </body>
 
