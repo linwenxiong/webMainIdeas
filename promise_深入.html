@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // promise.all 的使用
+        function prom() {
+            return new Promise((resolve, reject) => {
+                const time = Math.random() * 2000 + 1000;
+                setTimeout(() => {
+                    return resolve(time)
+                }, time)
+            })
+        }
+
+        // 加了async 就会默认返回promise对象,你返回的值会在fulfilled里面；
+        // 其实可以把await理解为，await 的方法移植到这个async方面里面；
+        async function getData() {
+            const res = await prom();
+            return res
+        }
+
+
+        function getlistdata() {
+
+            if (true) {
+                return Promise.resolve('出乎我的意料')
+            }
+            // return Promise.reject('受宠若惊')
+
+
+            var b  = new Promise((resolve,reject) => {
+                setTimeout(()=>{
+                    resolve('data:123')
+                },2000)
+            })
+            return b
+        }
+
+
+
+
+        // getlistdata().then((res) => {
+        //     console.log(res)
+        // }).catch((err) => {
+        //     console.log(err)
+        // })
+
+        (async () => {
+
+            const res = await getlistdata()
+            console.log(res)
+
+
+            // Promise.all([getData()]).then((res) => {
+            //     console.log(res)
+            // });
+
+        })()
+
+
+    </script>
+</body>
+
+</html>

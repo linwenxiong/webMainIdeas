@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        document.write("使用 Object.keys()循环键，使用Object.values()循环值")
+        Object.prototype.bbq = function () { alert(3) }
+        const obj = {
+            id: 1,
+            name: 'zhangsan',
+            age: 18
+        }
+        console.log(Object.keys(obj))
+        console.log(Object.values(obj))
+        document.write("使用for in 循环 ")
+        for (key in obj) {
+            console.log(obj[key])
+        }
+        console.log( Object.getOwnPropertyNames(obj))
+        
+    </script>
+</body>
+
+</html>

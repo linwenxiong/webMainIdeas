@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = []
+        function adc(id) {
+            console.log(id)
+            return Promise.resolve(id)
+        }
+        for (var i = 0; i < 3; i++) {
+            (function (id) {
+                arr.push(function () {
+                    const a = id;
+                    console.log(a, '---')
+                    return Promise.resolve(a)
+                })
+            })(i)
+        }
+ 
+
+        var comir = []
+        arr.forEach((item, index) => {
+            if (index <= 1) {
+                comir.push(item())
+            }
+        })
+
+        Promise.all(comir).then((res) => {
+            console.log(res)
+        })
+    </script>
+</body>
+
+</html>
