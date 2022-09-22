@@ -25,6 +25,14 @@
         }
         console.log( Object.getOwnPropertyNames(obj))
         
+        // 手机号脱敏
+         const desensitize = (text: string, start: number, end: number) => {
+          const reg = new RegExp(`^(.{${start}}).*?(.{${end}})$`);
+          return (text || '').replace(reg, '$1****$2');
+        };
+        
+        
+        
     </script>
 </body>
 
