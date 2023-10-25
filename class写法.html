@@ -10,7 +10,39 @@
 <body>
 
   <script>
+    class MediaCenter {
+      constructor() {
+        this.state = ''
+        this.observers = []
+      }
+      attach(observers) {
+        this.observers.push(observers)
+      }
+      getState() {
+        return this.state
+      }
+      setState(state) {
+        this.state = state
+        this.notifyAllobservers()
+      }
+      notifyAllobservers() {
+        this.observers.forEach(ob => {
+          ob.update()
+        })
+      }
+    }
 
+    class observers {
+      constructor(name, center) {
+        this.name = name
+        this.center = center
+        this.center.attach(this)
+      }
+      update() {
+        // 更新状态
+        this.center.getState()
+      }
+    }
 
   </script>
 </body>
