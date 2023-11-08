@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .content {
+      display: flex;
+    }
+
+    .text {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .text::before {
+      content: '';
+      float: right;
+      height: 100%;
+      margin-bottom: -20px;
+    }
+
+    .btn {
+      float: right;
+      clear: both;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="text">
+      <label class="btn" for="exp">展开</label>
+      <span>
+        【商品推荐】兴勤超市--陕西板栗红薯丨口感绵密，细腻如沙，吃上一口，粉面又香甜，还带有丝丝板栗香！
+        兴勤商场 2023-11-08 10:49 发表于广东</span>
+    </div>
+  </div>
+</body>
+
+</html>
