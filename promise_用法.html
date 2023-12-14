@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const requestAry = [() => api.request1(), () => api.request2(), () => api.request3()];
+    for (const requestItem of requestAry) {
+      await requestItem();
+    }
+
+
+
+    const requestAry = [() => api.request1(), () => api.request2(), () => api.request3()];
+
+    const finallyPromise = requestAry.reduce(
+      (currentPromise, nextRequest) =>
+        currentPromise.then(() => nextRequest()),
+      Promise.resolve() // 创建一个初始promise，用于链接数组内的promise
+    );
+
+  </script>
+</body>
+
+<!-- Vue和React实现原理和流程基本一致，都是使用Virtual DOM + Diff算法。不管是Vue的template模板 + options api写法，
+还是React的Class或者Function（js 的class写法也是function函数的一种）写法，底层最终都是为了生成render函数，render函数执行返回VNode（虚拟DOM的数据结构，本质上是棵树）。
+当每一次UI更新时，总会根据render重新生成最新的VNode，然后跟以前缓存起来老的VNode进行比对，
+再使用Diff算法（框架核心）去真正更新真实DOM（虚拟DOM是JS对象结构，同样在JS引擎中，而真实DOM在浏览器渲染引擎中，所以操作虚拟DOM比操作真实DOM开销要小的多）。 -->
+
+</html>

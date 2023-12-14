@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+      prev 必需 （上一次调用回调返回的值，或者是提供的初始值（initialValue））
+      cur 必需（数组中当前被处理的元素）
+      index 可选 （当前元素在数组中的索引）
+      arr 可选 （调用 reduce 的数组）
+    */
+
+
+    var sum = array.reduce(
+      (prev, cur, index, arr) => {
+        cur.list.forEach((item) => {
+          prev.push(item.ke)
+        })
+        return prev
+      }, [])
+    console.log(sum)
+  </script>
+</body>
+
+</html>
