@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 
 <head>
   <meta charset="UTF-8">
@@ -9,11 +9,21 @@
 
 <body>
   <script>
-    var arr = [1, 2, 3, 4, 4]
-    var arr2 = [2, 4]
-    for (let i = 0; i < arr.length; i++) {
-
+    /**
+     * 冒泡排序
+     * */
+    var arr = [1, 2, 5, 9, 6, 4, 7, 8, 3]
+    for (let i = 0; i < arr.length - 1; i++) { // 当前元素和它的+1元素进行比较的，不需要循环最后那个元素，所以这里需要减1
+      for (let j = 0; j < arr.length - 1 - i; j++) { // 循环一次减少一次比较 所以要减 i
+        if (arr[j] > arr[j + 1]) {
+          var temp = arr[j + 1]
+          arr[j + 1] = arr[j]
+          arr[j] = temp
+        }
+      }
     }
+    console.log('结束了', arr)
+
   </script>
 </body>
 
