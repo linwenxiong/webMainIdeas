@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" id="input" multiple />
+  <!--  <output id="button">选择图片文件……</output> -->
+  <iframe id="iframe" src="" frameborder="0"></iframe>
+
+
+  <script>
+    // const blob = new Blob([''], {
+    //   type: "image/png",
+    // });
+
+    // const url = URL.createObjectURL(blob);
+    // console.log(url)
+
+
+
+    // function fileToDataURL(file) {
+    //   let reader = new FileReader();
+    //   reader.readAsDataURL(file);
+    //   reader.onload = function (e) {
+    //     console.log(reader.result, 45)
+    //     return reader.result;
+    //   };
+    // }
+
+    // fileToDataURL(blob)
+
+
+
+
+
+
+
+    // const url = URL.createObjectURL(e.target.files[0]);
+
+
+    // const allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
+
+
+    const input = document.getElementById("input");
+    input.addEventListener("change", (event) => {
+
+      const files = event.target.files[0];
+
+       // =====================将blob类型转换后在链接上显示
+      // const blob = new Blob([files], {
+      //   type: "image/png",
+      // });
+      // const url = URL.createObjectURL(blob);
+      // console.log(url,'blob类型')
+
+
+      // =====================转base64在链接上显示
+      // let reader = new FileReader(); // 实例化一个filereader对象
+      // reader.readAsDataURL(files); // 把files这个文件放进去加载
+      // reader.onload = function (e) { //加载完成输出
+      //   console.log(reader.result, '加载完成')
+      //   return reader.result;
+      // };
+
+
+      // const blob = new Blob([files], {
+      //   type: "text/plain",
+      // });
+      // const reader = new FileReader()
+      // reader.readAsArrayBuffer(blob)
+      // reader.onload = () =>{
+      //   console.log(reader.result)
+      //   return reader.result;
+      // }
+
+
+
+  
+      // const reader = new FileReader();
+  
+      //   reader.readAsDataURL(files);
+      //   reader.onload = (e) => {
+      //     console.log(e.target.result);
+      //   };
+
+
+
+
+      // const a = document.createElement("a");
+      // a.href = url;
+      // a.download = "img";
+      // document.body.appendChild(a);
+      // a.click();
+      // document.body.removeChild(a);
+
+      // const allAllowed = Array.from(files).every((file) =>
+      //   allowedFileTypes.includes(file.type),
+      // );
+
+    });
+  </script>
+</body>
+
+</html>

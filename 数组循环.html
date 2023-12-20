@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-        var arr=[1,2,3,23]
-        var a = arr.filter(function(e){
-            return true
-        })
-        console.log(a)
 
-        arr.map(function(e){
-            if(e == 2)
-            {
-                return
-            }
-            console.log(e)
-        })
-    </script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var arr = [1, 2, 3, 23]
+    var a = arr.filter(function (e) {
+      return true
+    })
+    console.log(a)
+
+    arr.map(function (e) {
+      if (e == 2) {
+        return
+      }
+      console.log(e)
+    })
+
+
+    var modalDataSource = [{
+      name: 1111,
+      child: [
+        {
+          name: 2222,
+          child: {
+            name: 333
+          }
+        }
+      ]
+    },
+    {
+      name: 1111,
+      child: [
+        {
+          name: 2222,
+          child: {
+            name: 333
+          }
+        }
+      ]
+    }]
+    var arrs = [];
+    console.log(arrs, 6666)
+    arrs.push({ name: 12312131 })
+    console.log(arrs, 6666)
+
+  </script>
 </body>
+
 </html>
