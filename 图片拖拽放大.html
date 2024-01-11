@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .ant-image-preview-img-body {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+
+
+    .ant-image-preview-img-wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+
+    }
+
+    .ant-image-preview-img {
+      display: block;
+      height: 100%;
+      cursor: grab;
+      pointer-events: auto;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ant-image-preview-img-body">
+    <div class="ant-image-preview-img-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+      <img class="ant-image-preview-img"
+        src="https://www.hzxqsy.com:8080/imgs/sxpzgl/20240110/tmp_bd97f6edf8cf5aa33c502d6c6010fb6e2f900fc6dbf6e27c.jpg">
+    </div>
+  </div>
+
+  <script>
+    let isDragging = false;
+    let initialMousePosition = { x: 0, y: 0 };
+    let distanceMoved = { x: 0, y: 0 };
+    let dom = null;
+    document.addEventListener('mousemove', function (event) {
+      if (isDragging) {
+        distanceMoved.x = event.clientX - initialMousePosition.x;
+        distanceMoved.y = event.clientY - initialMousePosition.y;
+
+        // 输出或使用拖动的距离
+        console.log('拖动的距离：X=' + distanceMoved.x + ', Y=' + distanceMoved.y);
+        dom.style = 'transform: translate3d(' + distanceMoved.x + 'px, ' + distanceMoved.y + 'px, 0px);'
+      }
+    }, false);
+
+    // 鼠标按下时记录初始位置
+    document.addEventListener('mousedown', function (event) {
+      dom = document.querySelector('.ant-image-preview-img-wrapper')
+      isDragging = true;
+      initialMousePosition.x = event.clientX;
+      initialMousePosition.y = event.clientY;
+      console.log('鼠标按下', initialMousePosition)
+
+    });
+
+    // 鼠标抬起时重置状态和数据
+    document.addEventListener('mouseup', function () {
+      isDragging = false;
+      distanceMoved.x = 0;
+      distanceMoved.y = 0;
+      dom.style = 'transform: translate3d(' + 0 + 'px, ' + 0 + 'px, 0px);'
+    });
+
+  </script>
+</body>
+
+</html>
