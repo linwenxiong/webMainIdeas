@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .date-container {
+      perspective: 800px;
+      /* 设置透视效果 */
+    }
+
+    .date-container span {
+      display: inline-block;
+      transform-style: preserve-3d;
+      /* 保持元素在三维空间中不变形 */
+      animation: flipDate 4s infinite linear;
+      /* 应用动画并无限重复 */
+    }
+
+    @keyframes flipDate {
+      0% {
+        transform: rotateY(0deg);
+        /* 初始状态为正常显示 */
+      }
+
+      50% {
+        transform: rotateY(-90deg) scaleX(0.7);
+        /* 将文字向上翻转并放大 */
+      }
+
+      100% {
+        transform: rotateY(0deg);
+        /* 返回到原始位置 */
+      }
+    }
+
+    .divbox {
+      position: relative;
+      height: 16px;
+    }
+
+    .div1,
+    .div2,
+    .div3 {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 1;
+      position: absolute;
+      background-color: aliceblue;
+
+      overflow: hidden;
+    }
+
+    .div1 {
+      height: 8px;
+      top: 0;
+      z-index: 3;
+      transform: rotateX(0deg);
+      transform-origin: bottom;
+      transition: all 0.5s;
+    }
+
+    .div2 {
+      height: 8px;
+      bottom: 0;
+      z-index: 2;
+      line-height: 0px;
+    }
+
+    .div3 {
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="date-container">
+      <span>2021</span><br />
+      <span>January</span><br />
+      <span>15th</span>
+    </div>
+  </div>
+  <div class="divbox">
+    <div class="div1" style="transform: rotateX(180deg);">
+      02
+    </div>
+    <div class="div2">
+      02
+    </div>
+    <div class="div3">
+      08
+    </div>
+  </div>
+
+
+</body>
+
+</html>
