@@ -44,13 +44,14 @@
 
     .divbox {
       position: relative;
-      height: 16px;
+      height: 20px;
     }
 
     .div1,
+    .div_zhong,
     .div2,
     .div3 {
-      font-size: 16px;
+      font-size: 20px;
       font-weight: bold;
       line-height: 1;
       position: absolute;
@@ -60,16 +61,28 @@
     }
 
     .div1 {
-      height: 8px;
+      height: 10px;
       top: 0;
       z-index: 3;
       transform: rotateX(0deg);
       transform-origin: bottom;
       transition: all 0.5s;
+      animation: flaptop 1s infinite;
+    }
+
+    .div_zhong {
+      height: 10px;
+      bottom: 0;
+      z-index: 3;
+      line-height: 0px;
+      transform-origin: top;
+      transform: rotateX(-90deg);
+      transition: all 0.3s;
+      animation: flapdow 1s infinite;
     }
 
     .div2 {
-      height: 8px;
+      height: 10px;
       bottom: 0;
       z-index: 2;
       line-height: 0px;
@@ -78,30 +91,81 @@
     .div3 {
       z-index: 1;
     }
+
+    @keyframes flaptop {
+      0% {
+        transform: rotateX(0deg);
+      }
+
+      50% {
+        transform: rotateX(-90deg);
+      }
+
+      100% {
+        transform: rotateX(-180deg);
+      }
+    }
+
+    @keyframes flapdow {
+      0% {
+        /* transform: rotateX(-180deg); */
+      }
+
+      50% {
+        transform: rotateX(-90deg);
+      }
+
+      100% {
+        transform: rotateX(0deg);
+      }
+    }
   </style>
 </head>
 
 <body>
   <div id="app">
-    <div class="date-container">
+    <!-- <div class="date-container">
       <span>2021</span><br />
       <span>January</span><br />
       <span>15th</span>
-    </div>
+    </div> -->
   </div>
   <div class="divbox">
-    <div class="div1" style="transform: rotateX(180deg);">
-      02
+    <div class="div1">
+      00
     </div>
     <div class="div2">
-      02
+      00
     </div>
+    <div class="div_zhong">00</div>
     <div class="div3">
-      08
+      00
     </div>
   </div>
 
+  <script>
+    function getDate() {
+      setInterval(() => {
+        const date = new Date();
+        const year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        const hours = date.getHours();
+        let minutes = date.getMinutes();
+        let second = date.getSeconds();
+        minutes = minutes > 9 ? minutes : '0' + minutes;
+        month = month > 9 ? month : '0' + month;
+        day = day > 9 ? day : '0' + day;
 
+        document.querySelector('.div1').innerText = second > 9 ? second : '0' + second
+        document.querySelector('.div2').innerText = second > 9 ? second : '0' + second
+        document.querySelector('.div_zhong').innerText = second > 9 ? second + 1 : '0' + (second + 1)
+        document.querySelector('.div3').innerText = second > 9 ? second + 1 : '0' + (second + 1)
+      }, 1000);
+    }
+    getDate()
+
+  </script>
 </body>
 
 </html>

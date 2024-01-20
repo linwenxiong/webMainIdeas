@@ -92,17 +92,148 @@ export class User {
 
 // 运行 Typedoc
 // 在项目目录下运行 Typedoc 命令，指定要解析的输入文件和输出目录：
-
 // #
 // bash
 // typedoc --out docs/ src/
-
 // 在这个例子中：
-
-
 // --out 参数指定了生成的文档应保存到的目录。
 // src/ 是源码目录，Typedoc 将会从这个目录及其子目录下的所有 TypeScript 文件中提取注释并生成文档。
-
 // 还可以根据需要配置其他 Typedoc 选项，比如主题、模块解析方式、是否排除外部模块等。具体的配置项可以查阅 Typedoc 的官方文档。
-
 // 最终，Typedoc 将根据你的 TypeScript 代码中的注释以及类型信息自动生成一个 HTML 格式的API文档。
+
+/**
+ * 定义一个无返回值的方法
+ */
+function adc(): void {
+}
+
+
+interface IPerson {
+  firstName: string,
+  lastName: string,
+  sayHi: () => string
+}
+
+var customer: IPerson = {
+  firstName: "Tom",
+  lastName: "Hanks",
+  sayHi: (): string => { return "Hi there" }
+}
+
+console.log("Customer 对象 ")
+console.log(customer.firstName)
+console.log(customer.lastName)
+console.log(customer.sayHi())
+
+var employee: IPerson = {
+  firstName: "Jim",
+  lastName: "Blakes",
+  sayHi: (): string => { return "Hello!!!" }
+}
+
+console.log("Employee  对象 ")
+console.log(employee.firstName)
+console.log(employee.lastName)
+
+
+
+// ----------------------------------------接口的继承-----------------
+interface Base {
+  baseProp: string;
+}
+
+interface Derived extends Base {
+  derivedProp: number;
+}
+
+// ----------------------------------------如何在接口中使用联合类型-----------------
+interface RunOptions {
+  program: string;
+  commandline: string[] | string | (() => string);
+}
+
+// commandline 是字符串
+var options: RunOptions = { program: "test1", commandline: "Hello" };
+console.log(options.commandline)
+
+// commandline 是字符串数组
+options = { program: "test1", commandline: ["Hello", "World"] };
+console.log(options.commandline[0]);
+console.log(options.commandline[1]);
+
+// commandline 是一个函数表达式
+options = { program: "test1", commandline: () => { return "**Hello World**"; } };
+
+var fn: any = options.commandline;
+console.log(fn());
+
+
+
+// --------------------------------------泛型------------------
+// 泛型函数
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+// 使用泛型函数
+let result = identity<string>("Hello");
+console.log(result); // 输出: Hello
+
+let numberResult = identity<number>(42);
+console.log(numberResult); // 输出: 42
+
+
+// 基本语法
+interface Pair<T, U> {
+  first: T;
+  second: U;
+}
+
+// 使用泛型接口
+let pair: Pair<string, number> = { first: "hello", second: 42 };
+console.log(pair); // 输出: { first: 'hello', second: 42 }
+
+
+// 泛型Class
+class Box<T> {
+  private value: T;
+
+  constructor(value: T) {
+    this.value = value;
+  }
+
+  getValue(): T {
+    return this.value;
+  }
+}
+
+// 使用泛型类
+let stringBox = new Box<string>("TypeScript");
+console.log(stringBox.getValue()); // 输出: TypeScript
+
+
+
+// 泛型约束
+interface Lengthwise {
+  length: number;
+}
+
+function logLength<T extends Lengthwise>(arg: T): void {
+  console.log(arg.length);
+}
+
+// 正确的使用
+logLength("hello"); // 输出: 5
+
+// 错误的使用，因为数字没有 length 属性
+logLength(42); // 错误
+
+
+// 泛型默认值
+function defaultValue<T = string>(arg: T): T {
+  return arg;
+}
+
+// 使用带默认值的泛型函数
+let result1 = defaultValue("hello"); // 推断为 string 类型
+let result2 = defaultValue(42);      // 推断为 number 类型

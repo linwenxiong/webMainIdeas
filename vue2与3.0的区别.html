@@ -1,62 +1,61 @@
-
 <html>
 <h1> </h1>
 <script>
-//   效率上的区别: 2.0 如果想要对一个对象进行响应式检测，就需要用Object.defineProperty来去监听对象的所有属性，如果这个对象属性有100个的话，那就得循环100次，这样就是使得效率大大降低；
-    var obj = {
-        name: '',
-        age: '',
-        aihao: ''
+  //   效率上的区别: 2.0 如果想要对一个对象进行响应式检测，就需要用Object.defineProperty来去监听对象的所有属性，如果这个对象属性有100个的话，那就得循环100次，这样就是使得效率大大降低；
+  var obj = {
+    name: '',
+    age: '',
+    aihao: ''
+  }
+  Object.defineProperty(obj, 'name', {
+    get: function () {
+      console.log('get')
+    },
+    set: function () {
+      console.log('set')
     }
-    Object.defineProperty(obj, 'name', {
-        get: function () {
-            console.log('get')
-        },
-        set: function () {
-            console.log('set')
-        }
-    })
-    Object.defineProperty(obj, 'age', {
-        get: function () {
-            console.log('get')
-        },
-        set: function () {
-            console.log('set')
-        }
-    })
-    Object.defineProperty(obj, 'aihao', {
-        get: function () {
-            console.log('get')
-        },
-        set: function () {
-            console.log('set')
-        }
-    })
-// Proxy监视整个对象；
-    let target = {
-        x: 10,
-        y: 20,
-        a: 1,
-        b: 2,
-        c: 3,
-        d: 4
-    };
+  })
+  Object.defineProperty(obj, 'age', {
+    get: function () {
+      console.log('get')
+    },
+    set: function () {
+      console.log('set')
+    }
+  })
+  Object.defineProperty(obj, 'aihao', {
+    get: function () {
+      console.log('get')
+    },
+    set: function () {
+      console.log('set')
+    }
+  })
+  // Proxy监视整个对象；
+  let target = {
+    x: 10,
+    y: 20,
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4
+  };
 
-    let hanler = {
-        get: function (e) {
-            console.log('get', e)
-        },
-        set: function (e) {
-            console.log('set', e)
-        }
-    };
+  let hanler = {
+    get: function (e) {
+      console.log('get', e)
+    },
+    set: function (e) {
+      console.log('set', e)
+    }
+  };
 
-    const targets = new Proxy(target, hanler);  // 实现了全部属性的监听
+  const targets = new Proxy(target, hanler);  // 实现了全部属性的监听
 
-    targets.x; //42
-    targets.y; //42
-    targets.x; // 42
-    targets.bbq = 123
+  targets.x; //42
+  targets.y; //42
+  targets.x; // 42
+  targets.bbq = 123
 
 </script>
 

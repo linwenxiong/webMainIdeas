@@ -1,0 +1,26 @@
+<html>
+<h1 id="h1"></h1>
+<script>
+
+  // Proxy监视整个对象；
+  let data = {
+    x: 10,
+    bbq: 0
+  };
+
+  let hanler = {
+    get: function (e, prop) {
+      console.log('get', e, prop)
+      return e[prop]
+    },
+    set: function (e, prop, value) {
+      document.getElementById('h1').innerHTML = value
+      console.log('被set了', e, prop, value)
+    }
+  };
+
+  const targets = new Proxy(data, hanler);  // 实现了全部属性的监听
+  targets.bbq = 123
+</script>
+
+</html>
