@@ -9,7 +9,41 @@
 
 <body>
   <script>
+    // ------------------------e定时器
+    function sleep1(ms, callback) {
+      setTimeout(callback, ms)
+    }
+    //sleep 1s
+    sleep1(1000, () => {
+      console.log(1000)
+    })
+    // ------------------------es6异步处理
+    const sleep = time => {
+      return new Promise(resolve => setTimeout(resolve, time)
+      )
+    }
+    sleep(1000).then(() => { console.log(1) })
 
+    // -------------------------yield后面是一个生成器 generator
+    function sleepGenerator(time) {
+      yield new Promise(function (resolve, reject) {
+        setTimeout(resolve, time);
+      })
+    }
+    sleepGenerator(1000).next().value.then(() => { console.log(1) })
+
+    // -------------------------es7---- async/await是基于Promise的，是进一步的一种优化
+    function sleep(time) {
+      return new Promise(resolve =>
+        setTimeout(resolve, time)
+      )
+    }
+    async function output() {
+      let out = await sleep(1000);
+      console.log(1);
+      return out;
+    }
+    output();
   </script>
 </body>
 
