@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <p>取色色值：<input type="color" id="color"></p>
+    <canvas id="myCanvas" style="background: url(https://www.zhangxinxu.com/study/201804/tt-bg.gif);">
+
+    </canvas>
+
+    <script>
+
+        var eleColor = document.getElementById('color');
+        eleColor.onchange = function (e) {
+            var rect = this.getBoundingClientRect();
+            console.log(rect);
+        }
+
+
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.fillStyle = "red";
+        ctx.fillRect(10, 10, 50, 50);
+
+        function copy() {
+            var imgData = ctx.getImageData(10, 10, 50, 50);
+
+            for (var i = 0; i < imgData.data.length; i += 4) {
+                imgData.data[i] = 13;
+                imgData.data[i + 1] = 13;
+                imgData.data[i + 2] = 235;
+                imgData.data[i + 3] = 255;
+            }
+            console.log(imgData);
+            ctx.putImageData(imgData, 50, 0);
+        }
+        copy()
+    </script>
+</body>
+
+</html>
