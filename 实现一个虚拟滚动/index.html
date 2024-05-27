@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>虚拟滚动</title>
+  <script src="./plug/vue.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+    }
+
+    body {
+      background-color: #f6f7f9;
+      font-size: 14px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .virtual-scroller {
+      height: 100%;
+      overflow-y: auto;
+      background-color: rgb(61, 61, 61);
+      color: #ffffff;
+    }
+
+    .virtual-scroller_inner {
+      position: relative;
+    }
+
+    .ul {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- 外层滚动区域 获取窗口高度 -->
+    <div class="virtual-scroller" @scroll="onScroll" :style="{height: wrappyHeight + 'px'}">
+      <!-- 内层区域  获取每个dom的高度的总和 -->
+      <div class="virtual-scroller_inner" :style="{ height:countHeight+'px'}">
+        <ul ref="ul" class="ul" :style="{top: scrollTop+'px'}">
+          <li v-for="item,index in visibleList" :key="index" :style="{height: itemHeight + 'px'}"
+            style="background-color:rosybrown; border-top: 1px solid #cfcfcf;">
+            {{item.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const num = 500000 //  数据总数
+    const offset = 8 // 设置偏移量
+    let containCount = 0 // 可以容纳的数量
+    new Vue({
+      el: '#app',
+      data: {
+        wrappyHeight: window.innerHeight,
+        itemHeight: 20,
+        scrollTop: 0,
+        countHeight: 0,
+        startIndex: 0,
+        endIndex: 0,
+        dataList: []
+      },
+      mounted() {
+        const bigList = new Array(num).fill(null).map((item, index) => {
+          return {
+            id: index,
+            name: 'name' + index
+          }
+        })
+        this.dataList = Object.freeze(bigList)
+        // 计算总高度 总数量* 每个dom的高度
+        this.countHeight = num * this.itemHeight
+        containCount = this.wrappyHeight / this.itemHeight
+        this.endIndex = containCount + offset
+      },
+      computed: {
+        visibleList() {
+          return this.dataList.slice(this.startIndex, this.endIndex)
+        }
+      },
+      methods: {
+        onScroll(e) {
+          this.scrollTop = e.target.scrollTop
+          this.startIndex = Math.floor(e.target.scrollTop / this.itemHeight)
+          this.endIndex = this.startIndex + containCount + offset
+          console.log('scroll', e.target.scrollTop, this.startIndex, this.endIndex)
+        }
+      }
+    })
+  </script>
+</body>
+
+
+</html>
