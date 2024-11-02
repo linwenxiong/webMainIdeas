@@ -8,8 +8,10 @@
 </head>
 
 <body>
-<textarea id="textarea"></textarea>
+<textarea id="textarea" style="width: 300px; height: 500px;"></textarea>
+<textarea id="cssbox" style="width: 300px; height: 500px;"></textarea>
 <button onclick="getLevel1Class()">一级获取</button>
+<button onclick="gethtml()">获取html</button>
 <div id="content"></div>
 <script>
  const templateStr = `
@@ -37,37 +39,48 @@
 `;
 
 class GetClassName {
+    // template = '';
     constructor(template) {
-        // 解析模板字符串
+        // this.template = template;
+        // this.initHTML()
+    }
+
+    initHTML(template) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(template, 'text/html');
-        this.elementsWithClass = doc.querySelectorAll('*');
+        return doc.querySelectorAll('*');
     }
-    getClass() {
+
+    getClass(_eleStr) {
+        this.elementsWithClass = this.initHTML(_eleStr)
         // 创建一个 Set 来存储唯一的类名
         const classSet = new Set();
-        // 遍历所有带有 class 属性的元素
-        this.elementsWithClass.forEach(element => {
-            // 获取元素的所有类名
-            const classes = element.classList;
-            // 将每个类名添加到 Set 中
+        var  temp = []
+        for(let element of this.elementsWithClass) {
+            if(element.localName === 'template') {
+             temp =  this.getClass(element.innerHTML)
+             break
+            } 
+            const classes = element.classList; 
             classes.forEach(className => classSet.add(className));
-        });
-        return Array.from(classSet);
+            temp = Array.from(classSet);
+        }
+        return temp
     }
+
+
+    formatCss() {
+        const classList = this.getClass(document.getElementById('textarea').value)
+        const row = classList.map(item => `.${item}{}`).join('\n')
+        return row
+    }
+
 }
 
-const dom = new GetClassName(templateStr);
-
-function getLevel1Class() {
-    var list = dom.getClass();
-    var row = ''
-    for (var i = 0; i < list.length; i++) {
-        row += '.'+list[i]+'{}<br>'
-    } 
-    document.getElementById('content').innerHTML = row;
+const doms = new GetClassName(templateStr);
+function gethtml() {
+    document.getElementById('cssbox').value = doms.formatCss();
 }
-
 
   </script>
 </body>
