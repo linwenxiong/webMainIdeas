@@ -15,7 +15,6 @@
 <div id="content"></div>
 <script>
  const templateStr = `
- <template>
     <div class="material-box">
         <div class="column-gruop-list">
             <div class="column-gruop-list-title">任务列表</div>
@@ -36,7 +35,7 @@
             table
         </div>
     </div>
- </template>
+ 
 `;
 
 class GetClassName {
@@ -50,12 +49,6 @@ class GetClassName {
         const parser = new DOMParser();
         const doc = parser.parseFromString(template, 'text/html');
         return doc.querySelectorAll('*');
-    }
-    
-    formatDom2(template) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(template, 'text/html');
-        return doc.querySelectorAll('*')[3];
     }
 
     getClass(_eleStr) {
@@ -85,38 +78,13 @@ class GetClassName {
     formatlavercss() {
         // const _eleStr = document.getElementById('textarea').value
         const _eleStr = templateStr
-        this.elementsWithClass = this.formatDom2(_eleStr)
-        let strs = ''
-        strs += '.'+this.elementsWithClass.className+'{\n'
-        const classSet = new Set();
-
-        for (let element of this.elementsWithClass.children) {
-            const classes = element.classList; 
-            classes.forEach(className => classSet.add(className));
-            
+        this.elementsWithClass = this.formatDom(_eleStr) 
+        for(let element of this.elementsWithClass) {
+            console.log(element.localName, element.children);
+            element.children.forEach(item => {
+               console.log(item.className, 9988);
+            })
         }
-        var temp  = Array.from(classSet);
-        var rows = temp.map(item => `.${item}{}`).join('\n')
-        strs += rows
-        
-        strs += '\n}'
-        
-        return strs
-
-        // const classSet = new Set();
-        // for(let element of this.elementsWithClass) {
-        //     element.classList.forEach(className => classSet.add(className));
-        //     console.log(element ,999);
-
-            // return
-
-            // for(let celement of  element.children )  {
-            //    const classes = element.classList; 
-            //    classes.forEach(className => classSet.add(className));
-            //    var c = Array.from(classSet);
-            //     console.log(c);
-            // }
-        // }
     }
 
 
@@ -129,7 +97,7 @@ function gethtml() {
 }
 
 function getLevel1Class() {
-    document.getElementById('cssbox').value =  doms.formatlavercss();
+    doms.formatlavercss();
 }
 
 
