@@ -13,6 +13,7 @@
 <div id="content"></div>
 <script>
  const templateStr = `
+ <template>
     <div class="material-box">
         <div class="column-gruop-list">
             <div class="column-gruop-list-title">任务列表</div>
@@ -33,7 +34,7 @@
             table
         </div>
     </div>
- 
+ </template>
 `;
 
 class GetClassName {
@@ -58,8 +59,12 @@ class GetClassName {
 }
 
 const dom = new GetClassName(templateStr);
-
+console.log(dom)
 function getLevel1Class() {
+//     var a = document.getElementById('textarea').value;
+//     console.log(a)
+// return
+
     var list = dom.getClass();
     var row = ''
     for (var i = 0; i < list.length; i++) {
