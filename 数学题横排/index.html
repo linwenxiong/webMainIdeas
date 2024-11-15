@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+    }
+    .wrappy {
+        width: 100vw;
+        height: 48vh;
+        background-color: bisque;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .item {
+        height: 40px;
+        line-height: 40px;
+    }
+</style>
+<body>
+    <div class="wrappy">
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 + 80 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div> 
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 + 50 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 + 50 + 50 + 60 =___</div>
+        <div class="item">20 + 30 + 50 =___</div>
+        <div class="item">20 + 30 + 50 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 + 50 =___</div>
+        <div class="item">20 + 30 =___</div>
+        <div class="item">20 + 30 =___</div>
+    </div>
+<script>
+    var arr = [  
+        '20 + 30 =___',
+        '20 + 30 + 80 =___',
+        '20 + 10 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___', 
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 + 50 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 + 50 + 50 + 60 =___',
+        '20 + 30 + 50 =___',
+        '20 + 30 + 50 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 + 50 =___',
+        '20 + 30 =___',
+        '20 + 30 =___', 
+        '20 + 30 =___',
+        '20 + 30 + 80 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___', 
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 + 50 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 + 50 + 50 + 60 =___',
+        '20 + 30 + 50 =___',
+        '20 + 30 + 50 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 =___',
+        '20 + 30 + 50 =___',
+        '20 + 30 =___',
+        '20 + 30 =___'
+        ]
+
+    var  cbb = []
+    while(arr.length > 0 ) {
+        const items =  arr.splice(0, 10)
+        cbb.push(items)
+    }
+    console.log(cbb)
+    
+</script>
+</body>
+</html>
