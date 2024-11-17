@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+    }
+    /* .wrappy {
+        width: 100vw;
+        height: 48vh;
+        background-color: bisque;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .item {
+        height: 40px;
+        line-height: 40px;
+    } */
+</style>
+<body>
+    <div class="wrappy">
+         <img src="https://picsum.photos/300/300" alt="">
+         <img src="https://picsum.photos/300/300" alt="">
+         <img src="https://picsum.photos/300/300" alt="">
+         <img src="https://picsum.photos/300/300" alt="">
+         <img src="https://picsum.photos/300/300" alt="">
+    </div>
+<script>
+ const url = 'https://picsum.photos/v2/list'; // 图片列表
+ fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    const wrappy = document.querySelector('.wrappy');
+    data.forEach(item => {
+      const img = document.createElement('img');
+      img.src = item.download_url;
+      wrappy.appendChild(img);
+    });
+  })
+  .catch(error => console.error(error));
+  
+</script>
+</body>
+</html>
