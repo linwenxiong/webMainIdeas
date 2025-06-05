@@ -8,14 +8,14 @@
 </head>
 
 <body>
-<textarea id="textarea" style="width: 300px; height: 500px;"></textarea>
+<textarea id="textarea" style="width: 600px; height: 500px;"></textarea>
 <textarea id="cssbox" style="width: 300px; height: 500px;"></textarea>
-<button onclick="getLevel1Class()">一级获取</button>
-<button onclick="gethtml()">获取html</button>
+<button onclick="handleGetLevel1Class()">二级级获取</button>
+<button onclick="handleGetClass()">一级获取</button>
 <div id="content"></div>
 <script>
  const templateStr = `
- <template>
+
     <div class="material-box">
         <div class="column-gruop-list">
             <div class="column-gruop-list-title">任务列表</div>
@@ -36,7 +36,7 @@
             table
         </div>
     </div>
- </template>
+
 `;
 
 class GetClassName {
@@ -58,8 +58,8 @@ class GetClassName {
         return doc.querySelectorAll('*')[3];
     }
 
-    getClass(_eleStr) {
-        this.elementsWithClass = this.formatDom(_eleStr)
+    getClass(htmlText) {
+        this.elementsWithClass = this.formatDom(htmlText)
         console.log(this.elementsWithClass);
         // 创建一个 Set 来存储唯一的类名
         const classSet = new Set();
@@ -76,63 +76,51 @@ class GetClassName {
         return temp
     }
 
-    formatCss() {
-        const classList = this.getClass(document.getElementById('textarea').value)
+    formatCss(htmlText) {
+        const classList = this.getClass(htmlText)
         const row = classList.map(item => `.${item}{}`).join('\n')
         return row
     }
 
-    formatlavercss() {
+    formatlavercss(DOM) {
         // const _eleStr = document.getElementById('textarea').value
-        const _eleStr = templateStr
-        this.elementsWithClass = this.formatDom2(_eleStr)
+        
         let strs = ''
-        strs += '.'+this.elementsWithClass.className+'{\n'
+        strs += '.' + DOM.className + '{\n'
         const classSet = new Set();
 
-        for (let element of this.elementsWithClass.children) {
+        for (let element of DOM.children) {
             const classes = element.classList; 
             classes.forEach(className => classSet.add(className));
-            
         }
         var temp  = Array.from(classSet);
         var rows = temp.map(item => `.${item}{}`).join('\n')
         strs += rows
-        
         strs += '\n}'
-        
         return strs
-
-        // const classSet = new Set();
-        // for(let element of this.elementsWithClass) {
-        //     element.classList.forEach(className => classSet.add(className));
-        //     console.log(element ,999);
-
-            // return
-
-            // for(let celement of  element.children )  {
-            //    const classes = element.classList; 
-            //    classes.forEach(className => classSet.add(className));
-            //    var c = Array.from(classSet);
-            //     console.log(c);
-            // }
-        // }
     }
-
-
+// 第二版
+    formatlavercss2(template) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(template, 'text/html');
+        return doc.getElementsByTagName('body')
+        // return doc.querySelectorAll('*');
+    }
 }
+
 
 const doms = new GetClassName(templateStr);
 
-function gethtml() {
-    document.getElementById('cssbox').value = doms.formatCss();
+function handleGetLevel1Class() {
+    const _html = document.getElementById('textarea').value
+    const dms = doms.formatDom(_html)
+    document.getElementById('cssbox').value =  doms.formatlavercss(dms[3]);
 }
 
-function getLevel1Class() {
-    document.getElementById('cssbox').value =  doms.formatlavercss();
+function handleGetClass() {
+    const _html = document.getElementById('textarea').value
+    document.getElementById('cssbox').value = doms.formatCss(_html);
 }
-
-
   </script>
 </body>
 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+<textarea id="textarea" style="width: 300px; height: 500px;"></textarea>
+<textarea id="cssbox" style="width: 300px; height: 500px;"></textarea>
+<button onclick="getLevel1Class()">一级获取</button>
+<div id="content"></div>
+<script>
+ const templateStr = `
+
+    <div class="material-box">
+        <div class="column-gruop-list">
+            <div class="column-gruop-list-title">任务列表</div>
+            <div class="column-gruop-list-search">搜索框</div>
+            <div class="column-gruop-list-content">
+                <div class="column-gruop-list-item">
+                    <div class="column-gruop-list-item-header">
+                        2024/10/158 19:38
+                        <el-button type="primary" size="mini">开始</el-button>
+                    </div>
+                    <div class="column-gruop-list-item-footer">
+                        文件名
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column-gruop-table">
+            table
+        </div>
+		<div class="column-gruop-table222">
+            table
+        </div>
+    </div>
+
+`;
+
+class GetClassName {
+    constructor(template) {
+        const parser = new DOMParser();
+        this.doc = parser.parseFromString(template, 'text/html');
+    }
+
+    formatlavercss2(tagName) {
+        console.log(this.doc.getElementsByTagName(tagName));
+        return this.doc.getElementsByTagName(tagName)[0]
+    }
+
+    createdCss(dom) {
+        var str = ''
+		str += dom.className ? `.${dom.className}{` : ''
+		for( let ele of dom.children ) {
+			str += this.createdCss(ele)
+		}
+		str += dom.className? '}' : ''
+        return str
+    }
+
+}
+
+
+
+
+function getLevel1Class() {
+  
+    const doms = new GetClassName(  document.getElementById("textarea").value);
+	var dm = doms.formatlavercss2('body')
+	console.log(dm,9)
+    document.getElementById('cssbox').value = doms.createdCss(dm)
+	
+}
+
+
+  </script>
+</body>
+
+</html>
